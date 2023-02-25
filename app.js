@@ -1,9 +1,10 @@
 const fs = require('fs');
-const httpStatus = require('http-status');
 const express = require('express');
+const httpStatus = require('http-status');
+const morgan = require("morgan");
 
 const app = express();
-// Middlewares
+// Middleware
 app.use(express.json());
 app.use((req, res, next) => {
   req.requestTime = new Date().toLocaleString();
