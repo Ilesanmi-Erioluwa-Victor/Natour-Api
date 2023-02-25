@@ -1,11 +1,9 @@
-const httpStatus = require("http-status");
+const mongoose = require("mongoose");
 
-exports.ValidateId = (req, res, next, val) => {
-  if (!val) {
-    return res.status(httpStatus.NOT_FOUND).json({
-      status: "fail",
-      message: "Invalid ID"
-    });
-  }
-  next();
+const ValidateId = id => {
+  const isValidId = mongoose.Types.ObjectId.isValid(id);
+
+  if (!isValidId) throw new Error("Invalid Id passed, check your Id");
 };
+
+module.exports = ValidateId;
