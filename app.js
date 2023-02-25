@@ -137,8 +137,6 @@ const deleteUser = (req, res) => {
 const tourRouter = express.Router();
 const userRouter = express.Router();
 
-
-
 userRouter
   .route('/')
   .get(getAllUsers)

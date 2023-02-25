@@ -1,6 +1,5 @@
-const express = require("express");
-
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
 router
   .route('/')
@@ -12,3 +11,5 @@ router
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+module.exports = router;
