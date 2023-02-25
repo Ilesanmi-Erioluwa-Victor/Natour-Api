@@ -28,3 +28,11 @@ const importData = async () => {
     console.log(error);
   }
 };
+
+// DELETE ALL DATA FROM DB COLLECTION
+const deleteData = async () => {
+  try {
+  } catch (error) {
+    console.log(error);
+  }
+};
