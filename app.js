@@ -99,53 +99,38 @@ const deleteTour = (req, res) => {
 // same as above..
 
 const getAllUsers = (req, res) => {
-  console.log(req.requestTime);
-  res.status(httpStatus.OK).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    result: tours.length,
-    data: { tours },
+  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+    status: 'error',
+    message : "This route is not yet defined.."
   });
 };
 
 const createUser = (req, res) => {
-  console.log(req.requestTime);
-  res.status(httpStatus.OK).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    result: tours.length,
-    data: { tours },
-  });
+ res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+   status: 'error',
+   message: 'This route is not yet defined..',
+ });
 };
 
 
 const getUser = (req, res) => {
-  console.log(req.requestTime);
-  res.status(httpStatus.OK).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    result: tours.length,
-    data: { tours },
-  });
+ res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+   status: 'error',
+   message: 'This route is not yet defined..',
+ });
 };
 
 const updateUser = (req, res) => {
-  console.log(req.requestTime);
-  res.status(httpStatus.OK).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    result: tours.length,
-    data: { tours },
+  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+    status: 'error',
+    message: 'This route is not yet defined..',
   });
 };
 
 const deleteUser = (req, res) => {
-  console.log(req.requestTime);
-  res.status(httpStatus.OK).json({
-    status: 'success',
-    requestedAt: req.requestTime,
-    result: tours.length,
-    data: { tours },
+  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+    status: 'error',
+    message: 'This route is not yet defined..',
   });
 };
 
