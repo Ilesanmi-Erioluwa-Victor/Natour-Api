@@ -55,11 +55,20 @@ exports.getTour = async (req, res) => {
 
 exports.updateTour = async (req, res) => {
   try {
-     const { id } = req.params;
-    const tour = await Tour.findByIdAndUpdate()
+    const { id } = req.params;
+    const tour = await Tour.findByIdAndUpdate(
+      id,
+      {},
+      {
+        new: true,
+        runValidators: true
+      }
+    );
     res.status(httpStatus.OK).json({
       status: "success",
-      data: { tour: "Updated" }
+      data: {
+        tour
+      }
     });
   } catch (error) {
     res.status(httpStatus.BAD_REQUEST).json({
