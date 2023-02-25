@@ -19,6 +19,8 @@ app.get('/api/v1/tours', (req, res) => {
   });
 });
 
+
+// Create new Tour
 app.post('/api/v1/tours', (req, res) => {
   const newId = tours[tours.length - 1].id + 1;
   const newTour = Object.assign({ id: newId }, req.body);
@@ -31,6 +33,16 @@ app.post('/api/v1/tours', (req, res) => {
         tour : newTour
       }
    })
+  });
+});
+
+// Get a tour
+app.get('/api/v1/tours/:id', (req, res) => {
+  console.log(req.params);
+  res.status(httpStatus.OK).json({
+    status: 'success',
+    // result: tours.length,
+    // data: { tours },
   });
 });
 
