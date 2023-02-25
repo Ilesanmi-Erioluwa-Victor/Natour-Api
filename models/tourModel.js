@@ -19,9 +19,14 @@ const tourSchema = new mongoose.Schema({
     required: [true, "A tour must have a difficulty"]
   },
 
-  rating: {
+  ratingsAverage: {
     type: Number,
     default: 2
+  },
+
+  ratingsQuantity: {
+    type: Number,
+    default: 0
   },
   price: {
     type: Number,
