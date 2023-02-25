@@ -4,5 +4,13 @@ const tourSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Name is required"]
+  },
+  rating: {
+    type: Number,
+    default: 2
+  },
+  price: {
+    type: Number,
+    default: 100
   }
 });
