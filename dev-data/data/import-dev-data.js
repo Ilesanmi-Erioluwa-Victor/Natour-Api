@@ -17,12 +17,13 @@ mongoose.connect(DB).then(() => {
 });
 
 // READ JSON FILE
-const tours = fs.readFileSync("tours-simple.json", "utf-8");
+const tours = JSON.parse(fs.readFileSync("tours-simple.json", "utf-8"));
 
 // Import data to database..
 const importData = async () => {
   try {
     await Tour.create(tours);
+    console.log("Data successfully uploaded...");
   } catch (error) {
     console.log(error);
   }
