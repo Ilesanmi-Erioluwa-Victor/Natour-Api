@@ -4,7 +4,7 @@ const tourSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Name is required"],
-    unique: true
+    trim: true
   },
   duration: {
     type: Number,
@@ -37,7 +37,8 @@ const tourSchema = new mongoose.Schema({
   summary: {
     type: String,
     trim: true
-  }
+  },
+  
 });
 
 const Tour = mongoose.model("Tour", tourSchema);
