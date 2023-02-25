@@ -81,16 +81,11 @@ const deleteTour = (req, res) => {
   });
 };
 
-// Create new Tour
-app.post('/api/v1/tours', createTour);
-// Get all tours...
-app.get('/api/v1/tours', getAllTours);
-// Get a tour
-app.get('/api/v1/tours/:id', getTour);
 
-// Update a tour with Patch method
+app.post('/api/v1/tours', createTour);
+app.get('/api/v1/tours', getAllTours);
+app.get('/api/v1/tours/:id', getTour);
 app.patch("/api/v1/tours/:id", updateTour);
-// Delete a tour with 
 app.delete("/api/v1/tours/:id", deleteTour)
 
 const port = 3000;
