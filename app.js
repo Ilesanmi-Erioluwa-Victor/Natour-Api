@@ -97,6 +97,58 @@ const deleteTour = (req, res) => {
 // app.delete('/api/v1/tours/:id', deleteTour);
 
 // same as above..
+
+const getAllUsers = (req, res) => {
+  console.log(req.requestTime);
+  res.status(httpStatus.OK).json({
+    status: 'success',
+    requestedAt: req.requestTime,
+    result: tours.length,
+    data: { tours },
+  });
+};
+
+const createUser = (req, res) => {
+  console.log(req.requestTime);
+  res.status(httpStatus.OK).json({
+    status: 'success',
+    requestedAt: req.requestTime,
+    result: tours.length,
+    data: { tours },
+  });
+};
+
+
+const getUser = (req, res) => {
+  console.log(req.requestTime);
+  res.status(httpStatus.OK).json({
+    status: 'success',
+    requestedAt: req.requestTime,
+    result: tours.length,
+    data: { tours },
+  });
+};
+
+const updateUser = (req, res) => {
+  console.log(req.requestTime);
+  res.status(httpStatus.OK).json({
+    status: 'success',
+    requestedAt: req.requestTime,
+    result: tours.length,
+    data: { tours },
+  });
+};
+
+const deleteUser = (req, res) => {
+  console.log(req.requestTime);
+  res.status(httpStatus.OK).json({
+    status: 'success',
+    requestedAt: req.requestTime,
+    result: tours.length,
+    data: { tours },
+  });
+};
+
 app
   .route('/api/v1/tours')
   .get(getAllTours)
