@@ -1,6 +1,18 @@
 const httpStatus = require("http-status");
 const Tour = require("../models/tourModel");
 
+exports.createTour = async (req, res) => {
+  try {
+    const tour = Tour.create({});
+    res.status(httpStatus.CREATED).json({
+      status: "success",
+      data: {
+        tour
+      }
+    });
+  } catch (error) {}
+};
+
 exports.getAllTours = (req, res) => {
   res.status(httpStatus.OK).json({
     status: "success",
@@ -14,15 +26,6 @@ exports.getTour = (req, res) => {
   res.status(httpStatus.OK).json({
     status: "success"
     // data: { tour }
-  });
-};
-
-exports.createTour = (req, res) => {
-  res.status(httpStatus.CREATED).json({
-    status: "success",
-    data: {
-      tour: ""
-    }
   });
 };
 
