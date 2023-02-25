@@ -5,6 +5,5 @@ exports.ValidateId = (req, res, next, val) => {
       message: "Invalid ID"
     });
   }
-
   next();
 };
