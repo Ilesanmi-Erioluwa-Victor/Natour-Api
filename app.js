@@ -53,18 +53,7 @@ const createTour = (req, res) => {
   );
 };
 
-c
-// Get all tours...
-app.get('/api/v1/tours',getAllTours);
-// Get a tour
-app.get('/api/v1/tours/:id', getTour);
-// Create new Tour
-app.post('/api/v1/tours', createTour);
-
-
-// Update a tour with Patch method
-app.patch("/api/v1/tours/:id", (req, res) => {
-
+const updateTour = (req, res) => {
   if (parseInt(req.params.id) > tours.length) {
     return res.status(httpStatus.NOT_FOUND).json({
       status: 'fail',
@@ -74,25 +63,36 @@ app.patch("/api/v1/tours/:id", (req, res) => {
 
   res.status(httpStatus.OK).json({
     status: 'success',
-    data: { tour: "Updated" },
+    data: { tour: 'Updated' },
   });
-});
+};
 
-// Delet a tour with 
-app.delete("/api/v1/tours/:id", (req, res) => {
-
-    if (parseInt(req.params.id) > tours.length) {
-      return res.status(httpStatus.NOT_FOUND).json({
-        status: 'fail',
-        message: 'Invalid ID',
-      });
-    }
-
-    res.status(httpStatus.NO_CONTENT).json({
-      status: 'success',
-      data: { tour : null },
+const deleteTour = (req, res) => {
+  if (parseInt(req.params.id) > tours.length) {
+    return res.status(httpStatus.NOT_FOUND).json({
+      status: 'fail',
+      message: 'Invalid ID',
     });
-})
+  }
+
+  res.status(httpStatus.NO_CONTENT).json({
+    status: 'success',
+    data: { tour: null },
+  });
+};
+
+// Create new Tour
+app.post('/api/v1/tours', createTour);
+// Get all tours...
+app.get('/api/v1/tours', getAllTours);
+// Get a tour
+app.get('/api/v1/tours/:id', getTour);
+
+// Update a tour with Patch method
+app.patch("/api/v1/tours/:id", updateTour);
+// Delete a tour with 
+app.delete("/api/v1/tours/:id", deleteTour)
+
 const port = 3000;
 app.listen(port, () => {
   console.log(`App running on port : ${port}..`);
