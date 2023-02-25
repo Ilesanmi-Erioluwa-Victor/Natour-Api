@@ -134,6 +134,8 @@ const deleteUser = (req, res) => {
   });
 };
 
+// Routes
+const tourRouter = express.Router();
 app
   .route('/api/v1/tours')
   .get(getAllTours)
