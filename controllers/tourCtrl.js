@@ -1,5 +1,6 @@
 const httpStatus = require("http-status");
 const Tour = require("../models/tourModel");
+const ValidateId = require("../middlewares/ValidateId");
 
 exports.createTour = async (req, res) => {
   try {
@@ -36,11 +37,21 @@ exports.getAllTours = async (req, res) => {
   }
 };
 
-exports.getTour = (req, res) => {
-  res.status(httpStatus.OK).json({
-    status: "success"
-    // data: { tour }
-  });
+exports.getTour = async (req, res) => {
+  try {
+    const { id } = req.params;
+    ValidateId(id);
+    const tour = await Tour.findById(id);
+    res.status(httpStatus.OK).json({
+      status: "success",
+      data: { tour }
+    });
+  } catch (error) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      status: "fail",
+      message: error
+    });
+  }
 };
 
 exports.updateTour = (req, res) => {
