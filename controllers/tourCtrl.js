@@ -3,14 +3,19 @@ const Tour = require("../models/tourModel");
 
 exports.createTour = async (req, res) => {
   try {
-    const tour = Tour.create({});
+    const tour = await Tour.create(req.body);
     res.status(httpStatus.CREATED).json({
       status: "success",
       data: {
         tour
       }
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      status: "fail",
+      message: error
+    });
+  }
 };
 
 exports.getAllTours = (req, res) => {
