@@ -31,6 +31,12 @@ const tourSchema = new mongoose.Schema({
   price: {
     type: Number,
     default: 100
+  },
+  priceDiscount: Number,
+  
+  summary: {
+    type: String,
+    
   }
 });
 
