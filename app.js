@@ -9,6 +9,7 @@ const app = express();
 // Middleware
 app.use(morgan("dev"));
 app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 // For getting time
 app.use((req, res, next) => {
   req.requestTime = new Date().toLocaleString();
