@@ -38,11 +38,13 @@ app.post('/api/v1/tours', (req, res) => {
 
 // Get a tour
 app.get('/api/v1/tours/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const tour = tours.find( newId => newId.id === id)
   console.log(req.params);
   res.status(httpStatus.OK).json({
     status: 'success',
-    // result: tours.length,
-    // data: { tours },
+    data: { tour },
   });
 });
 
