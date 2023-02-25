@@ -57,6 +57,22 @@ app.get('/api/v1/tours/:id', (req, res) => {
 // Update a tour with Patch method
 app.patch("/api/v1/tours/:id", (req, res) => {
 
+  if (parseInt(req.params.id) > tours.length) {
+    return res.status(httpStatus.NOT_FOUND).json({
+      status: 'fail',
+      message: 'Invalid ID',
+    });
+  }
+
+  res.status(httpStatus.OK).json({
+    status: 'success',
+    data: { tour: "Updated" },
+  });
+});
+
+// Delet a tour with 
+app.delete("/api/v1/tours/:id", (req, res) => {
+
     if (parseInt(req.params.id) > tours.length) {
       return res.status(httpStatus.NOT_FOUND).json({
         status: 'fail',
@@ -64,9 +80,9 @@ app.patch("/api/v1/tours/:id", (req, res) => {
       });
     }
 
-    res.status(httpStatus.OK).json({
+    res.status(httpStatus.NO_CONTENT).json({
       status: 'success',
-      data: { tour : "Updated" },
+      data: { tour : null },
     });
 })
 const port = 3000;
