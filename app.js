@@ -48,13 +48,27 @@ app.get('/api/v1/tours/:id', (req, res) => {
     });
   }
 
-  console.log(req.params);
   res.status(httpStatus.OK).json({
     status: 'success',
     data: { tour },
   });
 });
 
+// Update a tour with Patch method
+app.patch("/api/v1/tours/:id", (req, res) => {
+
+    if (parseInt(req.params.id) > tours.length) {
+      return res.status(httpStatus.NOT_FOUND).json({
+        status: 'fail',
+        message: 'Invalid ID',
+      });
+    }
+
+    res.status(httpStatus.OK).json({
+      status: 'success',
+      data: { tour : "Updated" },
+    });
+})
 const port = 3000;
 app.listen(port, () => {
   console.log(`App running on port : ${port}..`);
