@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
+const httpStatus = require('http-status');
 
+const router = express.Router();
 
 const getAllUsers = (req, res) => {
   res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
@@ -46,6 +47,6 @@ router
   .route('/:id')
   .get(getUser)
   .patch(updateUser)
-    .delete(deleteUser);
-  
+  .delete(deleteUser);
+
 module.exports = router;

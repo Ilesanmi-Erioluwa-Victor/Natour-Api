@@ -1,12 +1,10 @@
 const express = require('express');
-const httpStatus = require('http-status');
 const morgan = require('morgan');
 
-const tourRouter = require("./routes/tourRoutes");
+const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 
 const app = express();
-
 
 // Middleware
 app.use(morgan('dev'));

@@ -1,11 +1,12 @@
 const fs = require('fs');
 const express = require('express');
+const httpStatus = require('http-status');
+
 const router = express.Router();
 
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 );
-
 
 const getAllTours = (req, res) => {
   console.log(req.requestTime);
@@ -80,7 +81,6 @@ const deleteTour = (req, res) => {
     data: { tour: null },
   });
 };
-
 
 router
   .route('/')
