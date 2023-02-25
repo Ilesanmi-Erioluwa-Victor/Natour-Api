@@ -5,14 +5,20 @@ const express = require('express');
 const app = express();
 // Middlewares
 app.use(express.json());
+app.use((req, res, next) => {
+  req.requestTime = new Date().toLocaleString();
+  next();
+})
 
 const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/tours-simple.json`)
 );
 
 const getAllTours = (req, res) => {
+  console.log(req.requestTime);
   res.status(httpStatus.OK).json({
     status: 'success',
+    requestedAt : req.requestTime,
     result: tours.length,
     data: { tours },
   });
