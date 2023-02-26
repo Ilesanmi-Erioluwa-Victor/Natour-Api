@@ -21,6 +21,7 @@ exports.createTour = async (req, res) => {
 
 exports.getAllTours = async (req, res) => {
   try {
+    console.log(req.query);
     const tours = await Tour.find();
 
     res.status(httpStatus.OK).json({
