@@ -22,7 +22,10 @@ exports.createTour = async (req, res) => {
 exports.getAllTours = async (req, res) => {
   try {
     console.log(req.query);
-    const tours = await Tour.find();
+    const tours = await Tour.find({
+      duration: 5,
+      difficulty: "easy"
+    });
 
     res.status(httpStatus.OK).json({
       status: "success",
