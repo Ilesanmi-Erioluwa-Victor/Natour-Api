@@ -7,7 +7,9 @@ const tourCtrl = require("./../controllers/tourCtrl");
 
 // router.param("id", ValidateId);
 
-router.route("/top-5-cheap")
+router
+  .route("/top-5-cheap")
+  .get(tourCtrl.aliasesTopCheap, tourCtrl.getAllTours);
 
 router
   .route("/")
