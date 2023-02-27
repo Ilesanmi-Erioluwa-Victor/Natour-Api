@@ -21,11 +21,7 @@ exports.createTour = async (req, res) => {
 
 exports.getAllTours = async (req, res) => {
   try {
-    console.log(req.query);
-    const tours = await Tour.find({
-      duration: 5,
-      difficulty: "easy"
-    });
+    const tours = await Tour.find(req.query);
 
     res.status(httpStatus.OK).json({
       status: "success",
