@@ -26,8 +26,11 @@ exports.getAllTours = async (req, res) => {
 
     excludedField.forEach(el => delete objQuery[el]);
 
-    const tours = await Tour.find(objQuery);
+    // const tours = await Tour.find(objQuery);
+    const query = Tour.find(objQuery);
 
+    const tours = await query;
+    
     res.status(httpStatus.OK).json({
       status: "success",
       // requestedAt: req.requestTime
