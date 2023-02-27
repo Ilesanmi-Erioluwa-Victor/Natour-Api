@@ -46,11 +46,8 @@ exports.getAllTours = async (req, res) => {
     }
     //3) FIELD LIMITING
     if (req.query.fields) {
-      const sortBy = req.query.sort.split(",").join(" ");
-      console.log(sortBy);
-      query = query.sort(sortBy);
-      //1) if two tours has same price, then
-      //2) sort("price ratingsAverage");
+      const fields = x;
+      query = query.select("");
     } else {
       query = query.sort("-createdAt");
     }
