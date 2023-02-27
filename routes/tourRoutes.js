@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const ValidateId = require("../middlewares/ValidateId");
+// const ValidateId = require("../middlewares/ValidateId");
 const tourCtrl = require("./../controllers/tourCtrl");
 
 // router.param("id", ValidateId);

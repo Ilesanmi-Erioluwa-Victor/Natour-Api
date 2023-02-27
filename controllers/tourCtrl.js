@@ -1,7 +1,11 @@
 const httpStatus = require("http-status");
 const Tour = require("../models/tourModel");
-// const ValidateId = require("../middlewares/ValidateId");
 
+class ApiFeatures {
+  constructor(query, queryString) {
+    
+  }
+}
 exports.createTour = async (req, res) => {
   try {
     const tour = await Tour.create(req.body);
