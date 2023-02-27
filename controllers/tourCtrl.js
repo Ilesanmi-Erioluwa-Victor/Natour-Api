@@ -29,8 +29,10 @@ exports.getAllTours = async (req, res) => {
     excludedField.forEach(el => delete objQuery[el]);
 
     // 2) ADVANCE FILTERING..
-    const queryStr = JSON.stringify(objQuery);
-    queryStr.replace(/\b(gte|gt|lte|lt)\b/);
+    let queryStr = JSON.stringify(objQuery);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+    console.log(JSON.parse(queryStr));
+
     const query = Tour.find(objQuery);
 
     // EXECUTE THE QUERY
