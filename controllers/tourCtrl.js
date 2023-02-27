@@ -22,12 +22,15 @@ exports.createTour = async (req, res) => {
 exports.getAllTours = async (req, res) => {
   try {
     // BUILD QUERY
+    // 1) Filtering
     const objQuery = { ...req.query };
     const excludedField = ["sort", "page", "limit", "fields"];
 
     excludedField.forEach(el => delete objQuery[el]);
 
-    // const tours = await Tour.find(objQuery);
+    // 2) ADVANCE FILTERING..
+    const queryStr = JSON.stringify(objQuery);
+
     const query = Tour.find(objQuery);
 
     // EXECUTE THE QUERY
