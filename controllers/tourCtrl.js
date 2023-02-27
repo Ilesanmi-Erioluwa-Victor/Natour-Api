@@ -54,6 +54,8 @@ exports.getAllTours = async (req, res) => {
 
     // 4) PAGINATION
     const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1 ) * limit;
     // EXECUTE THE QUERY
     const tours = await query;
 
