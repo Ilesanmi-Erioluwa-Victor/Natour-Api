@@ -53,7 +53,7 @@ exports.getAllTours = async (req, res) => {
     }
 
     // 4) PAGINATION
-    
+    const page = req.query.page * 1 || 1;
     // EXECUTE THE QUERY
     const tours = await query;
 
