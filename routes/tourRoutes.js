@@ -8,7 +8,7 @@ const tourCtrl = require("./../controllers/tourCtrl");
 // router.param("id", ValidateId);
 
 router
-  .route("/top-5-cheap")
+  .route("/top-5-cheapTours")
   .get(tourCtrl.aliasesTopTours, tourCtrl.getAllTours);
 
 router
