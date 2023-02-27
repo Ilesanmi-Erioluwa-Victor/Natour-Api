@@ -9,7 +9,7 @@ const tourCtrl = require("./../controllers/tourCtrl");
 
 router
   .route("/top-5-cheap")
-  .get(tourCtrl.aliasesTopCheap, tourCtrl.getAllTours);
+  .get(tourCtrl.aliasesTopTours, tourCtrl.getAllTours);
 
 router
   .route("/")
