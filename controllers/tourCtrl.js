@@ -29,7 +29,7 @@ exports.getAllTours = async (req, res) => {
 
     // const tours = await Tour.find(objQuery);
     const query = Tour.find(objQuery);
-    
+
     // EXECUTE THE QUERY
     const tours = await query;
 
