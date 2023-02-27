@@ -19,6 +19,8 @@ exports.createTour = async (req, res) => {
   }
 };
 
+exports.aliasesTopCheap = async (req, res) => {};
+
 exports.getAllTours = async (req, res) => {
   try {
     // BUILD QUERY
