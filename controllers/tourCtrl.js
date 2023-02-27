@@ -41,6 +41,8 @@ exports.getAllTours = async (req, res) => {
       query = query.sort(sortBy);
       //1) if two tours has same price, then
       //2) sort("price ratingsAverage");
+    } else {
+      query = query.sort("-createdAt");
     }
     // EXECUTE THE QUERY
     const tours = await query;
