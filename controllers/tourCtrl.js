@@ -3,7 +3,8 @@ const Tour = require("../models/tourModel");
 
 class ApiFeatures {
   constructor(query, queryString) {
-    
+    this.query = query;
+    this.queryString = queryString;
   }
 }
 exports.createTour = async (req, res) => {
