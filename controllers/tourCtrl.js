@@ -21,6 +21,7 @@ exports.createTour = async (req, res) => {
 
 exports.getAllTours = async (req, res) => {
   try {
+    // BUILD QUERY
     const objQuery = { ...req.query };
     const excludedField = ["sort", "page", "limit", "fields"];
 
@@ -28,9 +29,10 @@ exports.getAllTours = async (req, res) => {
 
     // const tours = await Tour.find(objQuery);
     const query = Tour.find(objQuery);
-
-    const tours = await query;
     
+    // EXECUTE THE QUERY
+    const tours = await query;
+
     res.status(httpStatus.OK).json({
       status: "success",
       // requestedAt: req.requestTime
