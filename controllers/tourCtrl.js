@@ -6,6 +6,22 @@ class ApiFeatures {
     this.query = query;
     this.queryString = queryString;
   }
+
+  filter() {
+        const objQuery = { ...req.query };
+        const excludedField = ["sort", "page", "limit", "fields"];
+
+        excludedField.forEach(el => delete objQuery[el]);
+
+        // 1B) ADVANCE FILTERING..
+        let queryStr = JSON.stringify(objQuery);
+        queryStr = queryStr.replace(
+          /\b(gte|gt|lte|lt)\b/g,
+          match => `$${match}`
+        );
+
+        let query = Tour.find(JSON.parse(queryStr));
+  }
 }
 exports.createTour = async (req, res) => {
   try {
