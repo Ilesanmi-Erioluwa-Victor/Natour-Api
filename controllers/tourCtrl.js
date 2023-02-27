@@ -17,7 +17,6 @@ class ApiFeatures {
     let queryStr = JSON.stringify(objQuery);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     this.query.find(JSON.parse(queryStr));
-    // let query = Tour.find(JSON.parse(queryStr));
   }
 }
 exports.createTour = async (req, res) => {
@@ -48,16 +47,16 @@ exports.getAllTours = async (req, res) => {
   try {
     // BUILD QUERY
     // 1A) Filtering
-    const objQuery = { ...req.query };
-    const excludedField = ["sort", "page", "limit", "fields"];
+    // const objQuery = { ...req.query };
+    // const excludedField = ["sort", "page", "limit", "fields"];
 
-    excludedField.forEach(el => delete objQuery[el]);
+    // excludedField.forEach(el => delete objQuery[el]);
 
-    // 1B) ADVANCE FILTERING..
-    let queryStr = JSON.stringify(objQuery);
-    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+    // // 1B) ADVANCE FILTERING..
+    // let queryStr = JSON.stringify(objQuery);
+    // queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
-    let query = Tour.find(JSON.parse(queryStr));
+    // let query = Tour.find(JSON.parse(queryStr)); same as ApiFeatures
 
     //2) SORTING
     if (req.query.sort) {
@@ -89,6 +88,7 @@ exports.getAllTours = async (req, res) => {
       if (skip >= numTours) throw new Error("Page does not exit!!");
     }
     // EXECUTE THE QUERY
+    const features = new ApiFeatures(Tour.find(), req.query).filter();
     const tours = await query;
 
     res.status(httpStatus.OK).json({
