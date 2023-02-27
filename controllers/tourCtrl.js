@@ -31,9 +31,8 @@ exports.getAllTours = async (req, res) => {
     // 2) ADVANCE FILTERING..
     let queryStr = JSON.stringify(objQuery);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
-    console.log(JSON.parse(queryStr));
 
-    const query = Tour.find(objQuery);
+    const query = Tour.find(JSON.parse(queryStr));
 
     // EXECUTE THE QUERY
     const tours = await query;
