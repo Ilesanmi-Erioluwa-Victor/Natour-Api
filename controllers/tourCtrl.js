@@ -30,7 +30,7 @@ exports.getAllTours = async (req, res) => {
 
     // 2) ADVANCE FILTERING..
     const queryStr = JSON.stringify(objQuery);
-
+    queryStr.replace(/\b(gte|gt|lte|lt)\b/);
     const query = Tour.find(objQuery);
 
     // EXECUTE THE QUERY
