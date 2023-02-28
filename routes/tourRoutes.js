@@ -12,7 +12,7 @@ router
   .get(tourCtrl.aliasesTopTours, tourCtrl.getAllTours);
 
 router.route("/tours-stats").get(tourCtrl.getToursStats);
-router.route("/monthly-plan").get(tourCtrl.getMonthlyPlan);
+router.route("/monthly-plan/:year").get(tourCtrl.getMonthlyPlan);
 
 router
   .route("/")
