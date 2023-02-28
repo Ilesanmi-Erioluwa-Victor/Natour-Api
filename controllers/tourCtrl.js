@@ -24,7 +24,7 @@ class ApiFeatures {
       //1) if two tours has same price, then
       //2) sort("price ratingsAverage");
     } else {
-      // query = query.sort("-createdAt");
+      this.query = this.query.sort("-createdAt");
     }
   }
 }
