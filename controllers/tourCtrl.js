@@ -13,7 +13,10 @@ class ApiFeatures {
 
     excludedField.forEach(el => delete objQuery[el]);
     let queryStr = JSON.stringify(objQuery);
-    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+    this.queryStr = this.queryStr.replace(
+      /\b(gte|gt|lte|lt)\b/g,
+      match => `$${match}`
+    );
     this.query.find(JSON.parse(queryStr));
 
     return this;
@@ -40,16 +43,12 @@ class ApiFeatures {
   }
 
   paginate() {
-       const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || 100;
+    const page = this.queryString.page * 1 || 1;
+    const limit = this.queryString.limit * 1 || 100;
     const skip = (page - 1) * limit;
 
-    query = query.skip(skip).limit(limit);
-
-    if (req.query.page) {
-      const numTours = await Tour.countDocuments();
-      if (skip >= numTours) throw new Error("Page does not exit!!");
-    }
+    this.query = query.skip(skip).limit(limit);
+    return this;
   }
 }
 exports.createTour = async (req, res) => {
