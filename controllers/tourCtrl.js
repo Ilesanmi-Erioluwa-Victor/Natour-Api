@@ -30,11 +30,11 @@ class ApiFeatures {
   }
 
   limitFields() {
-    if (this.req.query.fields) {
-      const fields = this.req.query.fields.split(",").join(" ");
-      this.query = query.select(fields);
+    if (this.queryString.fields) {
+      const fields = this.queryString.fields.split(",").join(" ");
+      this.query = this.query.select(fields);
     } else {
-      this.query = query.select("-__v");
+      this.query = this.query.select("-__v");
     }
   }
 }
