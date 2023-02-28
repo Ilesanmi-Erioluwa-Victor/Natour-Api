@@ -1,23 +1,22 @@
 const httpStatus = require("http-status");
 const Tour = require("../models/tourModel");
 
-class ApiFeatures {
+class APIFeatures {
   constructor(query, queryString) {
     this.query = query;
     this.queryString = queryString;
   }
 
   filter() {
-    const objQuery = { ...this.queryString };
-    const excludedField = ["sort", "page", "limit", "fields"];
+    const queryObj = { ...this.queryString };
+    const excludedFields = ["page", "sort", "limit", "fields"];
+    excludedFields.forEach(el => delete queryObj[el]);
 
-    excludedField.forEach(el => delete objQuery[el]);
-    let queryStr = JSON.stringify(objQuery);
-    this.queryStr = this.queryStr.replace(
-      /\b(gte|gt|lte|lt)\b/g,
-      match => `$${match}`
-    );
-    this.query.find(JSON.parse(queryStr));
+    // 1B) Advanced filtering
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
+
+    this.query = this.query.find(JSON.parse(queryStr));
 
     return this;
   }
@@ -29,6 +28,7 @@ class ApiFeatures {
     } else {
       this.query = this.query.sort("-createdAt");
     }
+
     return this;
   }
 
@@ -39,6 +39,7 @@ class ApiFeatures {
     } else {
       this.query = this.query.select("-__v");
     }
+
     return this;
   }
 
@@ -47,10 +48,12 @@ class ApiFeatures {
     const limit = this.queryString.limit * 1 || 100;
     const skip = (page - 1) * limit;
 
-    this.query = query.skip(skip).limit(limit);
+    this.query = this.query.skip(skip).limit(limit);
+
     return this;
   }
 }
+
 exports.createTour = async (req, res) => {
   try {
     const tour = await Tour.create(req.body);
@@ -121,7 +124,11 @@ exports.getAllTours = async (req, res) => {
     //   if (skip >= numTours) throw new Error("Page does not exit!!");
     // }
     // EXECUTE THE QUERY
-    const features = new ApiFeatures(Tour.find(), req.query).filter().sort().limitFields().paginate();
+    const features = new APIFeatures(Tour.find(), req.query)
+      .filter()
+      .sort()
+      .limitFields()
+      .paginate();
     const tours = await features.query;
 
     res.status(httpStatus.OK).json({
