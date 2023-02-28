@@ -112,10 +112,20 @@ exports.getToursStats = async (req, res) => {
       {
         $group: {
           _id: null,
-          avgRating : {$avg : }
+          avgRating: { $avg: "$ratingsAverage" },
+          avgPrice: { $avg: "$price" },
+          minPrice: { $min: "$price" },
+          maxPrice: { $max: "$price" }
         }
       }
     ]);
+
+    res.status(httpStatus.OK).json({
+      status: "success",
+      data: {
+        stats
+      }
+    });
   } catch (error) {
     res.status(httpStatus.BAD_REQUEST).json({
       status: "fail",
