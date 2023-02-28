@@ -140,3 +140,13 @@ exports.getToursStats = async (req, res) => {
     });
   }
 };
+
+exports.getMonthlyPlan = async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(httpStatus.BAD_REQUEST).json({
+      status: "fail",
+      message: error
+    });
+  }
+};
