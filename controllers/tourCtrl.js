@@ -145,7 +145,19 @@ exports.getMonthlyPlan = async (req, res) => {
   try {
     const year = req.params.year * 1;
 
-    const plan = await Tour.aggregate([]);
+    const plan = await Tour.aggregate([
+      {
+        $unwind: "$startDates"
+      },
+      {
+        $match: {
+          startDates: {
+            $gte: new Date(`${year}-01-01`),
+            $lte: new Date(`${year}-12-13`)
+          }
+        }
+      }
+    ]);
 
     res.status(httpStatus.OK).json({
       status: "success",
