@@ -121,7 +121,7 @@ exports.getAllTours = async (req, res) => {
     //   if (skip >= numTours) throw new Error("Page does not exit!!");
     // }
     // EXECUTE THE QUERY
-    const features = new ApiFeatures(Tour.find(), req.query).filter().sort();
+    const features = new ApiFeatures(Tour.find(), req.query).filter().sort().limitFields().paginate();
     const tours = await features.query;
 
     res.status(httpStatus.OK).json({
