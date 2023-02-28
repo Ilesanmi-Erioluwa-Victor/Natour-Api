@@ -36,6 +36,20 @@ class ApiFeatures {
     } else {
       this.query = this.query.select("-__v");
     }
+    return this;
+  }
+
+  paginate() {
+       const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 100;
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    if (req.query.page) {
+      const numTours = await Tour.countDocuments();
+      if (skip >= numTours) throw new Error("Page does not exit!!");
+    }
   }
 }
 exports.createTour = async (req, res) => {
@@ -97,16 +111,16 @@ exports.getAllTours = async (req, res) => {
     // }
 
     // 4) PAGINATION
-    const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || 100;
-    const skip = (page - 1) * limit;
+    // const page = req.query.page * 1 || 1;
+    // const limit = req.query.limit * 1 || 100;
+    // const skip = (page - 1) * limit;
 
-    query = query.skip(skip).limit(limit);
+    // query = query.skip(skip).limit(limit);
 
-    if (req.query.page) {
-      const numTours = await Tour.countDocuments();
-      if (skip >= numTours) throw new Error("Page does not exit!!");
-    }
+    // if (req.query.page) {
+    //   const numTours = await Tour.countDocuments();
+    //   if (skip >= numTours) throw new Error("Page does not exit!!");
+    // }
     // EXECUTE THE QUERY
     const features = new ApiFeatures(Tour.find(), req.query).filter().sort();
     const tours = await features.query;
