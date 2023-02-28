@@ -90,7 +90,7 @@ exports.updateTour = async (req, res) => {
 exports.deleteTour = async (req, res) => {
   try {
     const { id } = req.params;
-    const tour = await Tour.findByIdAndDelete(id);
+    await Tour.findByIdAndDelete(id);
     res.status(httpStatus.NO_CONTENT).json({
       status: "success",
       data: { tour: null }
@@ -102,3 +102,5 @@ exports.deleteTour = async (req, res) => {
     });
   }
 };
+
+exports.getToursStats = async (req, res) => {};
