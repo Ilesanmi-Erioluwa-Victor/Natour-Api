@@ -107,9 +107,15 @@ exports.getToursStats = async (req, res) => {
   try {
     const stats = await Tour.aggregate([
       {
-        $match : {ratingsAverage : {$gte : 4.5}}
+        $match: { ratingsAverage: { $gte: 4.5 } }
+      },
+      {
+        $group: {
+          _id: null,
+          avgRating : {$avg : }
+        }
       }
-    ])
+    ]);
   } catch (error) {
     res.status(httpStatus.BAD_REQUEST).json({
       status: "fail",
