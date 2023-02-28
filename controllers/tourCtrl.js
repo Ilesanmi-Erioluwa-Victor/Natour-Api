@@ -28,6 +28,15 @@ class ApiFeatures {
     }
     return this;
   }
+
+  limitFields() {
+    if (this.req.query.fields) {
+      const fields = this.req.query.fields.split(",").join(" ");
+      this.query = query.select(fields);
+    } else {
+      this.query = query.select("-__v");
+    }
+  }
 }
 exports.createTour = async (req, res) => {
   try {
@@ -80,12 +89,12 @@ exports.getAllTours = async (req, res) => {
     // } same as ApiFeatures.sort()
 
     //3) FIELD LIMITING
-    if (req.query.fields) {
-      const fields = req.query.fields.split(",").join(" ");
-      query = query.select(fields);
-    } else {
-      query = query.select("-__v");
-    }
+    // if (req.query.fields) {
+    //   const fields = req.query.fields.split(",").join(" ");
+    //   query = query.select(fields);
+    // } else {
+    //   query = query.select("-__v");
+    // }
 
     // 4) PAGINATION
     const page = req.query.page * 1 || 1;
