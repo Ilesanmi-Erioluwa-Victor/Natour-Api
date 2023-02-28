@@ -15,17 +15,18 @@ class ApiFeatures {
     let queryStr = JSON.stringify(objQuery);
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
     this.query.find(JSON.parse(queryStr));
+
+    return this;
   }
 
   sort() {
     if (this.queryString.sort) {
       const sortBy = this.queryString.sort.split(",").join(" ");
       this.query = this.query.sort(sortBy);
-      //1) if two tours has same price, then
-      //2) sort("price ratingsAverage");
     } else {
       this.query = this.query.sort("-createdAt");
     }
+    return this;
   }
 }
 exports.createTour = async (req, res) => {
@@ -98,7 +99,7 @@ exports.getAllTours = async (req, res) => {
       if (skip >= numTours) throw new Error("Page does not exit!!");
     }
     // EXECUTE THE QUERY
-    const features = new ApiFeatures(Tour.find(), req.query).filter();
+    const features = new ApiFeatures(Tour.find(), req.query).filter().sort();
     const tours = await features.query;
 
     res.status(httpStatus.OK).json({
