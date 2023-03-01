@@ -50,7 +50,11 @@ const tourSchema = new mongoose.Schema(
     },
     images: [String],
     startDates: [Date],
-    slug: String
+    slug: String,
+    secretTour: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true,
@@ -79,7 +83,10 @@ tourSchema.pre("save", function(next) {
   next();
 });
 
-// QUERY MIDDLEWARE 
+// QUERY MIDDLEWARE
+tourSchema.pre("find", function (next) {
 
+  next();
+})
 const Tour = mongoose.model("Tour", tourSchema);
 module.exports = Tour;
