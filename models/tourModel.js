@@ -41,8 +41,12 @@ const tourSchema = new mongoose.Schema(
     },
     priceDiscount: {
       type: Number,
-      validate: function(val) {
-        return val < this.price;
+      validate: {
+        validator: function(val) {
+          // This key word won't work on updating of file, only work for creating file..
+          return val < this.price;
+        },
+        message: "Discount price ({VALUE}) must be lesser than regular price"
       }
     },
 
