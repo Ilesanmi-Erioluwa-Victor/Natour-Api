@@ -33,7 +33,7 @@ app.all("*", (req, res, next) => {
   err.status = "fail";
   err.statusCode = 404;
 
-  next();
+  next(err);
 });
 
 app.use((err, req, res, next) => {
