@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const httpStatus = require("http-status");
 
 const tourRouter = require("./routes/tourRoutes");
 const userRouter = require("./routes/userRoutes");
@@ -22,5 +23,12 @@ app.use((req, res, next) => {
 // Routes
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);
+
+app.all("*", (req, res, next) => {
+  res.status(httpStatus.NOT_FOUND).json({
+    status: "fail",
+    message: `Can't find ${req.orignalUrl} `
+  });
+});
 
 module.exports = app;
