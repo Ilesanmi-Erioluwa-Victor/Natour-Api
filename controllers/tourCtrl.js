@@ -20,45 +20,31 @@ exports.aliasesTopTours = async (req, res, next) => {
   next();
 };
 
-exports.getAllTours = async (req, res) => {
-  try {
-    // EXECUTE THE QUERY
-    const features = new APIFeatures(Tour.find(), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .paginate();
-    const tours = await features.query;
+exports.getAllTours = catchAsync(async (req, res) => {
+  // EXECUTE THE QUERY
+  const features = new APIFeatures(Tour.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .paginate();
+  const tours = await features.query;
 
-    res.status(httpStatus.OK).json({
-      status: "success",
-      // requestedAt: req.requestTime
-      result: tours.length,
-      data: { tours }
-    });
-  } catch (error) {
-    res.status(httpStatus.BAD_REQUEST).json({
-      status: "fail",
-      message: error
-    });
-  }
-};
+  res.status(httpStatus.OK).json({
+    status: "success",
+    // requestedAt: req.requestTime
+    result: tours.length,
+    data: { tours }
+  });
+});
 
-exports.getTour = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const tour = await Tour.findById(id);
-    res.status(httpStatus.OK).json({
-      status: "success",
-      data: { tour }
-    });
-  } catch (error) {
-    res.status(httpStatus.BAD_REQUEST).json({
-      status: "fail",
-      message: error
-    });
-  }
-};
+exports.getTour = catchAsync(async (req, res) => {
+  const { id } = req.params;
+  const tour = await Tour.findById(id);
+  res.status(httpStatus.OK).json({
+    status: "success",
+    data: { tour }
+  });
+});
 
 exports.updateTour = async (req, res) => {
   try {
