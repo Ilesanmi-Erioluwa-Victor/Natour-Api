@@ -7,22 +7,15 @@ const catchAsync = fn => {
     fn(req, res, next).catch(err => next(err));
   };
 };
-exports.createTour = async (req, res) => {
-  try {
-    const tour = await Tour.create(req.body);
-    res.status(httpStatus.CREATED).json({
-      status: "success",
-      data: {
-        tour
-      }
-    });
-  } catch (error) {
-    res.status(httpStatus.BAD_REQUEST).json({
-      status: "fail",
-      message: error
-    });
-  }
-};
+exports.createTour = catchAsync(async (req, res) => {
+  const tour = await Tour.create(req.body);
+  res.status(httpStatus.CREATED).json({
+    status: "success",
+    data: {
+      tour
+    }
+  });
+});
 
 exports.aliasesTopTours = async (req, res, next) => {
   req.query.limit = "5";
