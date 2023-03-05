@@ -1,12 +1,8 @@
 const httpStatus = require("http-status");
 const Tour = require("../models/tourModel");
 const APIFeatures = require("../Utils/apifeactures");
+const catchAsync = require("../Utils/catchAsync");
 
-const catchAsync = fn => {
-  return (req, res, next) => {
-    fn(req, res, next).catch(err => next(err));
-  };
-};
 exports.createTour = catchAsync(async (req, res) => {
   const tour = await Tour.create(req.body);
   res.status(httpStatus.CREATED).json({
