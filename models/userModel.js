@@ -7,8 +7,14 @@ const userSchema = new mongoose({
   },
   email: {
     type: String,
-      required: true,
-      unique: true,
-    lowercase : true
+    required: true,
+    unique: true,
+    lowercase: true
+  },
+  photo: {
+    type: String
+  },
+  password: {
+    type: String
   }
 });
