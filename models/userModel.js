@@ -16,5 +16,11 @@ const userSchema = new mongoose({
   },
   password: {
     type: String
+  },
+
+  passwordConfirm: {
+    type: String
   }
 });
+
+const User = mongoose.model("User", userSchema);
