@@ -2,6 +2,9 @@ const httpStatus = require("http-status");
 const Tour = require("../models/tourModel");
 const APIFeatures = require("../Utils/apifeactures");
 
+const catchAsync = fn => {
+  return (req, res, next) => {};
+};
 exports.createTour = async (req, res) => {
   try {
     const tour = await Tour.create(req.body);
