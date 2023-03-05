@@ -3,7 +3,9 @@ const Tour = require("../models/tourModel");
 const APIFeatures = require("../Utils/apifeactures");
 
 const catchAsync = fn => {
-  return (req, res, next) => {};
+  return (req, res, next) => {
+    fn(req, res, next).catch(err => next(err));
+  };
 };
 exports.createTour = async (req, res) => {
   try {
