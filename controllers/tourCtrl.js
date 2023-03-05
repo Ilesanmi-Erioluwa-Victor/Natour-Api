@@ -3,7 +3,7 @@ const Tour = require("../models/tourModel");
 const APIFeatures = require("../Utils/apifeactures");
 const catchAsync = require("../Utils/catchAsync");
 
-exports.createTour = catchAsync(async (req, res) => {
+exports.createTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.create(req.body);
   res.status(httpStatus.CREATED).json({
     status: "success",
@@ -20,7 +20,7 @@ exports.aliasesTopTours = async (req, res, next) => {
   next();
 };
 
-exports.getAllTours = catchAsync(async (req, res) => {
+exports.getAllTours = catchAsync(async (req, res, next) => {
   // EXECUTE THE QUERY
   const features = new APIFeatures(Tour.find(), req.query)
     .filter()
@@ -37,7 +37,7 @@ exports.getAllTours = catchAsync(async (req, res) => {
   });
 });
 
-exports.getTour = catchAsync(async (req, res) => {
+exports.getTour = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const tour = await Tour.findById(id);
   res.status(httpStatus.OK).json({
@@ -46,7 +46,7 @@ exports.getTour = catchAsync(async (req, res) => {
   });
 });
 
-exports.updateTour = catchAsync(async (req, res) => {
+exports.updateTour = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const tour = await Tour.findByIdAndUpdate(id, req.body, {
     new: true,
@@ -60,7 +60,7 @@ exports.updateTour = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteTour = catchAsync(async (req, res) => {
+exports.deleteTour = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   await Tour.findByIdAndDelete(id);
   res.status(httpStatus.NO_CONTENT).json({
@@ -69,7 +69,7 @@ exports.deleteTour = catchAsync(async (req, res) => {
   });
 });
 
-exports.getToursStats = catchAsync(async (req, res) => {
+exports.getToursStats = catchAsync(async (req, res, next) => {
   const stats = await Tour.aggregate([
     {
       $match: { ratingsAverage: { $gte: 4.5 } }
@@ -100,7 +100,7 @@ exports.getToursStats = catchAsync(async (req, res) => {
   });
 });
 
-exports.getMonthlyPlan = catchAsync(async (req, res) => {
+exports.getMonthlyPlan = catchAsync(async (req, res, next) => {
   const year = req.params.year * 1;
 
   const plan = await Tour.aggregate([
