@@ -2,6 +2,7 @@ const httpStatus = require("http-status");
 const Tour = require("../models/tourModel");
 const APIFeatures = require("../Utils/apifeactures");
 const catchAsync = require("../Utils/catchAsync");
+const AppError = require("../Utils/appError");
 
 exports.createTour = catchAsync(async (req, res, next) => {
   const tour = await Tour.create(req.body);
@@ -40,6 +41,11 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
 exports.getTour = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const tour = await Tour.findById(id);
+  if (!tour) {
+    return next(
+      new AppError(`Sorry, no tour found with that ID, try again later`, 404)
+    );
+  }
   res.status(httpStatus.OK).json({
     status: "success",
     data: { tour }
