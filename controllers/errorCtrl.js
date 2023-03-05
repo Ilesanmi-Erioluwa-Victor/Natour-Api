@@ -22,7 +22,6 @@ const sendErrorProd = (err, res) => {
     console.error("Error : ", err);
 
     // 2) Send generic message
-    
     res.status(500).json({
       status: "error",
       message: "Something went wrong, try again"
