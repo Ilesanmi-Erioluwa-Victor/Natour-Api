@@ -54,6 +54,7 @@ userSchema.methods.correctPassword = async function(
   userPassword
 ) {
   // passing in userPassword because, we set select property to false on userSchema property
+  return await bycript.compare(candidatePassword, userPassword);
 };
 
 const User = mongoose.model("User", userSchema);
