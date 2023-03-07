@@ -39,10 +39,10 @@ userSchema.pre("save", async function(next) {
   // Only run this if password is modified
   if (!this.isModified("password")) return next();
 
-  // Hash password
+  // Hash password with coast of 12
   this.password = await bycript.hash(this.password, 12);
 
-  // Remove passwordConfirm after validating password
+  // Delete passwordConfirm after validating password
   this.passwordConfirm = undefined;
   next();
 });
