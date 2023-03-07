@@ -23,7 +23,8 @@ const userSchema = new mongoose.Schema({
       validator: function(el) {
         // This only work on create and save
         return el === this.password;
-      }
+      },
+      message: "Password are not matched!"
     }
   },
 
