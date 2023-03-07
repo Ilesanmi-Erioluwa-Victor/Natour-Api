@@ -19,8 +19,11 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
   res.status(httpStatus.CREATED).json({
     status: "success",
+    token,
     data: {
       user
     }
   });
 });
+
+exports.login = catchAsync(async (req, res, next) => {});
