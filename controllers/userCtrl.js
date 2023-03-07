@@ -1,18 +1,17 @@
 const httpStatus = require("http-status");
+const User = require("../models/userModel");
+const catchAsync = require("../Utils/catchAsync");
 
-exports.getAllUsers = (req, res) => {
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-    status: "error",
-    message: "This route is not yet is not yet defined "
+exports.getAllUsers = catchAsync(async (req, res, next) => {
+  const user = await User.find();
+  res.status(httpStatus.CREATED).json({
+    status: "success",
+    result: user.length,
+    data: {
+      user
+    }
   });
-};
-
-exports.createUser = (req, res) => {
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-    status: "error",
-    message: "This route is not yet is not yet defined "
-  });
-};
+});
 
 exports.getUser = (req, res) => {
   res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
