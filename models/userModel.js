@@ -19,7 +19,12 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, "Please provide  your password"],
+    required: [true, "Please provide  your password"]
+  },
+
+  passwordConfirm: {
+    type: String,
+    required: [true, "Please confirm  your password"],
     validate: {
       validator: function(el) {
         // This only work on create and save
@@ -27,11 +32,6 @@ const userSchema = new mongoose.Schema({
       },
       message: "Password are not matched!"
     }
-  },
-
-  passwordConfirm: {
-    type: String,
-    required: [true, "Please confirm  your password"]
   }
 });
 
@@ -39,6 +39,9 @@ userSchema.pre("save", async function(next) {
   if (!this.isModified("password")) return next();
 
   this.password = await bycript.hash(this.password, 12);
+
+  this.passwordConfirm = undefined;
+  next();
 });
 
 const User = mongoose.model("User", userSchema);
