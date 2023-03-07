@@ -34,7 +34,7 @@ exports.login = catchAsync(async (req, res, next) => {
     return next(new AppError("Please provided email and password", 400));
   }
   // 2)Check if user exists and password is correct
-
+  const user = await User.findOne({ email });
   // 3)if everything is okay, send token to client
   const token = "";
   res.status(httpStatus.CREATED).json({
