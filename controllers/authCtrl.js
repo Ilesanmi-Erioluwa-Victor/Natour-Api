@@ -14,7 +14,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   });
 
   const token = jwtToken(user._id);
-
+  console.log(token);
   res.status(httpStatus.CREATED).json({
     status: "success",
     token,
@@ -39,7 +39,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   // 3)if everything is okay, send token to client
 
-  const token = "";
+  const token = jwtToken(user._id);
   res.status(httpStatus.CREATED).json({
     status: "success",
     token
