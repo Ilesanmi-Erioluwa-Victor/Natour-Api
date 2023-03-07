@@ -48,5 +48,10 @@ userSchema.pre("save", async function(next) {
   next();
 });
 
+// Check for password confirmation methods
+userSchema.methods.correctPassword = async function (password, enteredPassword) {
+  
+}
+
 const User = mongoose.model("User", userSchema);
-module.exports = User;
+module.exports = User;
