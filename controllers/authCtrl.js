@@ -12,7 +12,9 @@ exports.signUp = catchAsync(async (req, res, next) => {
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm
   });
-  const token = 
+
+  const token = jwt.sign({ id: user._id }, );
+
   res.status(httpStatus.CREATED).json({
     status: "success",
     data: {
