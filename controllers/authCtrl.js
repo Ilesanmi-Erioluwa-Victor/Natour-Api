@@ -41,10 +41,21 @@ exports.login = catchAsync(async (req, res, next) => {
   const token = jwtToken(user._id);
   res.status(httpStatus.CREATED).json({
     status: "success",
-    token
-
-    //  data: {
-    //    user
-    //  }
+    token,
+    data: {
+      user
+    }
   });
 });
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError("You do not have permissions to perform this action", 403)
+      );
+    }
+
+    next();
+  };
+};
