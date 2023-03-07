@@ -3,12 +3,12 @@ const User = require("../models/userModel");
 const catchAsync = require("../Utils/catchAsync");
 
 exports.getAllUsers = catchAsync(async (req, res, next) => {
-  const user = await User.find();
+  const users = await User.find();
   res.status(httpStatus.CREATED).json({
     status: "success",
-    result: user.length,
+    result: users.length,
     data: {
-      user
+      users
     }
   });
 });
