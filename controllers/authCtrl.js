@@ -60,6 +60,6 @@ exports.restrictTo = (...roles) => {
   };
 };
 
-exports.forgotPassword = catchAsync(async (req, res, next) => { });
+exports.forgotPassword = catchAsync(async (req, res, next) => {});
 
 exports.resetPassword = catchAsync(async (req, res, next) => {});
