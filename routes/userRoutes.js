@@ -5,11 +5,9 @@ const authCtrl = require("../controllers/authCtrl");
 const router = express.Router();
 
 router.post("/signup", authCtrl.signUp);
+router.post("/login", authCtrl.login);
 
-router
-  .route("/")
-  .get(userCtrl.getAllUsers)
-  .post(userCtrl.createUser);
+router.route("/").get(userCtrl.getAllUsers);
 
 router
   .route("/:id")
