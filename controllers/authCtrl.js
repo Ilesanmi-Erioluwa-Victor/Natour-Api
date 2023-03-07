@@ -26,4 +26,12 @@ exports.signUp = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.login = catchAsync(async (req, res, next) => {});
+exports.login = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  // 1) Check if email and password is valid /exist
+
+  // 2)Check if user exists and password is correct
+
+  // 3)if everything is okay, send token  to client
+});
