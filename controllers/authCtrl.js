@@ -14,7 +14,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
   });
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_SECRET_EXPIRES
+    expiresIn: process.env.JWT_EXPIRES_IN
   });
 
   res.status(httpStatus.CREATED).json({
