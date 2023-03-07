@@ -1,8 +1,8 @@
 const httpStatus = require("http-status");
-const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const catchAsync = require("../Utils/catchAsync");
 const AppError = require("../Utils/appError");
+const jwtToken = require("../middlewares/jwtToken");
 
 exports.signUp = catchAsync(async (req, res, next) => {
   const user = await User.create({
@@ -13,9 +13,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm
   });
 
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN
-  });
+  const token = jwtToken(user._id);
 
   res.status(httpStatus.CREATED).json({
     status: "success",
@@ -35,9 +33,8 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   // 2)Check if user exists and password is correct
   const user = await User.findOne({ email }).select("+password");
-  const correct = user.correctPassword(password, user.password);
 
-  if (!user || !correct) {
+  if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError("Incorrect email or password", 401));
   }
   // 3)if everything is okay, send token to client
