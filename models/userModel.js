@@ -49,9 +49,12 @@ userSchema.pre("save", async function(next) {
 });
 
 // Check for password confirmation methods
-userSchema.methods.correctPassword = async function (password, enteredPassword) {
-  
-}
+userSchema.methods.correctPassword = async function(
+  candidatePassword,
+  userPassword
+) {
+  // passing in userPassword because, we set select property to false on userSchema property
+};
 
 const User = mongoose.model("User", userSchema);
-module.exports = User;
+module.exports = User;
