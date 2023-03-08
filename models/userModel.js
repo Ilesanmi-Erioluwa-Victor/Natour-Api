@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
       message: "Password are not matched!"
     }
   },
-  passwordChangeAt : Date
+  passwordChangeAt: Date
 });
 
 userSchema.pre("save", async function(next) {
@@ -63,5 +63,6 @@ userSchema.methods.correctPassword = async function(
   return await bycript.compare(candidatePassword, userPassword);
 };
 
+userSchema.methods.changePasswordAfter = function() {};
 const User = mongoose.model("User", userSchema);
 module.exports = User;
