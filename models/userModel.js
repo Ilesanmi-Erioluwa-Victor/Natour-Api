@@ -38,7 +38,8 @@ const userSchema = new mongoose.Schema({
       },
       message: "Password are not matched!"
     }
-  }
+  },
+  passwordChangeAt : Date
 });
 
 userSchema.pre("save", async function(next) {
