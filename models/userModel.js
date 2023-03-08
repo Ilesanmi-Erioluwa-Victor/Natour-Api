@@ -76,5 +76,7 @@ userSchema.methods.changePasswordAfter = function(JWTTimeStamps) {
   // false means not change
   return false;
 };
+
+userSchema.methods.createPasswordResetToken = function() {}
 const User = mongoose.model("User", userSchema);
 module.exports = User;
