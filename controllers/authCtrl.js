@@ -82,16 +82,27 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   request with your new password and passwordConfirm to
    :${resetURL}.\nif you didn't forget your password, please ignore this email`;
 
-  await sendEmail({
-    email: user.email,
-    subject: "Your password rest token (valid for 10 min)",
-    message
-  });
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Your password rest token (valid for 10 min)",
+      message
+    });
 
-  res.status(httpStatus.CREATED).json({
-    status: "success",
-    message: "Token sent to your email"
-  });
+    res.status(httpStatus.OK).json({
+      status: "success",
+      message: "Token sent to your email"
+    });
+  } catch (error) {
+    user.passwordResetToken = undefined;
+    user.passwordResetExpires = undefined;
+    await user.save({ validateBeforeSave: false });
+
+    return next(
+      new AppError("There was an email sending Email, try again"),
+      500
+    );
+  }
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {});
