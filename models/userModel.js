@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bycript = require("bcryptjs");
@@ -77,6 +78,6 @@ userSchema.methods.changePasswordAfter = function(JWTTimeStamps) {
   return false;
 };
 
-userSchema.methods.createPasswordResetToken = function() {}
+userSchema.methods.createPasswordResetToken = function() {};
 const User = mongoose.model("User", userSchema);
 module.exports = User;
