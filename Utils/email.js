@@ -12,9 +12,12 @@ const sendEmail = options => {
     //if you want to use gmail,  Activate in gmail "less secure app" option
   });
   // 2) Define the email options
-    const mailOptions = {
-        from: "Ilesanmi Erioluwa <ilesanmierioluwavictor2gmail.com>",
-        to : 
-    }
+  const mailOptions = {
+    from: "Ilesanmi Erioluwa <ilesanmierioluwavictor2gmail.com>",
+    to: options.email,
+    subject: options.subject,
+    text: options.text,
+    // html: options.email
+  };
   // 3) Actually send the email..
 };
