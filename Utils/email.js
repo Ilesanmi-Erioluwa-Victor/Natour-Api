@@ -16,8 +16,9 @@ const sendEmail = options => {
     from: "Ilesanmi Erioluwa <ilesanmierioluwavictor2gmail.com>",
     to: options.email,
     subject: options.subject,
-    text: options.text,
+    text: options.text
     // html: options.email
   };
   // 3) Actually send the email..
+  transporter.sendMail(mailOptions);
 };
