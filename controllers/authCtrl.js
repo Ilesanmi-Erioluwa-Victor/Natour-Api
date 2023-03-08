@@ -3,6 +3,7 @@ const User = require("../models/userModel");
 const catchAsync = require("../Utils/catchAsync");
 const AppError = require("../Utils/appError");
 const jwtToken = require("../middlewares/jwtToken");
+const sendEmail = require("../Utils/email");
 
 exports.signUp = catchAsync(async (req, res, next) => {
   const user = await User.create({
@@ -73,6 +74,9 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const resetToken = user.createPasswordResetToken();
   await user.save({ validateBeforeSave: false });
   // 3)send it's to user email
+  const resetURL = `${req.protocol}://${req.get(
+    "host"
+  )}/api/v1/users/resetPassword/${resetToken}`;
 });
 
 exports.resetPassword = catchAsync(async (req, res, next) => {});
