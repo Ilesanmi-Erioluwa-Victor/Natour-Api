@@ -63,6 +63,9 @@ userSchema.methods.correctPassword = async function(
   return await bycript.compare(candidatePassword, userPassword);
 };
 
-userSchema.methods.changePasswordAfter = function() {};
+userSchema.methods.changePasswordAfter = function(JWTTimeStamps) {
+  if (this.passwordChangeAt) {
+  }
+};
 const User = mongoose.model("User", userSchema);
 module.exports = User;
