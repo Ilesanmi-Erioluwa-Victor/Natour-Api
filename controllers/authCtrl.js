@@ -86,7 +86,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     await sendEmail({
       email: user.email,
       subject: "Your password rest token (valid for 10 min)",
-      message
+      message: message
     });
 
     res.status(httpStatus.OK).json({
