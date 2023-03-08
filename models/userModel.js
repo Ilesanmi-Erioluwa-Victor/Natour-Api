@@ -80,6 +80,11 @@ userSchema.methods.changePasswordAfter = function(JWTTimeStamps) {
 
 userSchema.methods.createPasswordResetToken = function() {
   const resetToken = crypto.randomBytes(32).toString("hex");
+
+  crypto
+    .createHash("sha256")
+    .update(resetToken)
+    .digest("hex");
 };
 const User = mongoose.model("User", userSchema);
 module.exports = User;
