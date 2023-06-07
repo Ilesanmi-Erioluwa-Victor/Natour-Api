@@ -139,4 +139,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 exports.updatePassword = (req, res, next) => {
   // 1) Get the user from collection
   // 2) Check if posted current password is correct
+  // 3) if password is correct, then update Password
+  // 4)Log in user, send JWT
 };
