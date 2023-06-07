@@ -62,6 +62,11 @@ userSchema.pre("save", async function(next) {
   next();
 });
 
+userSchema.pre(/^find/, async function (next) {
+  // this points to the current query..
+  
+});
+
 // Check for password confirmation methods
 userSchema.methods.correctPassword = async function(
   candidatePassword,
