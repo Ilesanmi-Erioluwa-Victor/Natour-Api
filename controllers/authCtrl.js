@@ -41,7 +41,7 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  // 1) Getting token and check of it's there
+  // 1) Getting token and check if it's there
   let token;
   if (
     req.headers.authorization &&
@@ -71,7 +71,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   // 4) Check if user changed password after the token was issued
-  if (currentUser.changedPasswordAfter(decoded.iat)) {
+  if (currentUser.changePasswordAfter(decoded.iat)) {
     return next(
       new AppError("User recently changed password! Please log in again.", 401)
     );
@@ -168,24 +168,20 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
-  // 1) Get the user from collection
+  // 1) Get user from collection
   const user = await User.findById(req.user.id).select("+password");
 
-  // 2) Check if posted current password is correct
+  // 2) Check if POSTed current password is correct
   if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-    return next(
-      new AppError(
-        "Your current password is incorrect, please try again...",
-        401
-      )
-    );
+    return next(new AppError("Your current password is wrong.", 401));
   }
-  // 3) if password is correct, then update Password
+
+  // 3) If so, update password
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
   // User.findByIdAndUpdate will NOT work as intended!
 
-  // 4)Log in user, send JWT
+  // 4) Log user in, send JWT
   createSendToken(user, 200, res);
 });
