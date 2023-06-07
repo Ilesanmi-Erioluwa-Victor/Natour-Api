@@ -6,7 +6,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const catchAsync = require("../Utils/catchAsync");
 const AppError = require("../Utils/appError");
-const signToken = require("../middlewares/signToken");
+// const signToken = require("../middlewares/signToken");
 const sendEmail = require("../Utils/email");
 const createSendToken = require("../middlewares/createSendToken");
 
