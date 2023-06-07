@@ -136,4 +136,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   createSendToken(user, 200, res);
 });
 
-exports.updatePassword = (req, res, next) => {};
+exports.updatePassword = (req, res, next) => {
+  // 1) Get the user from collection
+  // 2) Check if posted current password is correct
+};
