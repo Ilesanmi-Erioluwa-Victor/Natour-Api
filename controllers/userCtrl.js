@@ -62,7 +62,7 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 exports.getUser = (req, res) => {
   res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
     status: "error",
-    message: "This route is not yet defined.."
+    message: "This route is not yet defined..,hi.."
   });
 };
 

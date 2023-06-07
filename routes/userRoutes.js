@@ -12,8 +12,8 @@ router.patch("/resetPassword/:token", authCtrl.resetPassword);
 
 router.patch("/updateMyPassword", authCtrl.protect, authCtrl.updatePassword);
 
-router.patch("/updateMe", authCtrl.protect, authCtrl.updatePassword);
-router.delete("/deleteMe", authCtrl.protect, authCtrl.updatePassword);
+router.patch("/updateMe", authCtrl.protect, userCtrl.updateMe);
+router.delete("/deleteMe", authCtrl.protect, userCtrl.deleteMe);
 
 router.route("/").get(userCtrl.getAllUsers);
 
