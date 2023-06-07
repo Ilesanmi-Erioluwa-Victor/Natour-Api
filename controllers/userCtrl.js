@@ -50,27 +50,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getUser = (req, res) => {
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-    status: "error",
-    message: "This route is not yet defined.."
-  });
-};
-
-exports.updateUser = (req, res) => {
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-    status: "error",
-    message: "This route is not yet is not yet defined "
-  });
-};
-
-exports.deleteUser = (req, res) => {
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-    status: "error",
-    message: "This route is not yet is not yet defined "
-  });
-};
-
 exports.deleteMe = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
 
@@ -79,3 +58,29 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
     data: null
   });
 });
+
+exports.getUser = (req, res) => {
+  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+    status: "error",
+    message: "This route is not yet defined.."
+  });
+};
+
+exports.createUser = (req, res) => {
+  res.status(500).json({
+    status: "error",
+    message: "This route is not yet defined!"
+  });
+};
+exports.updateUser = (req, res) => {
+  res.status(500).json({
+    status: "error",
+    message: "This route is not yet defined!"
+  });
+};
+exports.deleteUser = (req, res) => {
+  res.status(500).json({
+    status: "error",
+    message: "This route is not yet defined!"
+  });
+};
