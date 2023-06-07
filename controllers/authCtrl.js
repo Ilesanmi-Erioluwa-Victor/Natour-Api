@@ -141,7 +141,8 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select("+password");
 
   // 2) Check if posted current password is correct
-if(!(user.correctPassword(req.body.password)))
+  if (!user.correctPassword(req.body.passwordCurrent, user.password)) {
+  }
   // 3) if password is correct, then update Password
   // 4)Log in user, send JWT
 });
