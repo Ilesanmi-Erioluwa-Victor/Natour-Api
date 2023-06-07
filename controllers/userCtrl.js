@@ -1,6 +1,7 @@
 const httpStatus = require("http-status");
 const User = require("../models/userModel");
 const catchAsync = require("../Utils/catchAsync");
+const AppError = require("../Utils/appError");
 
 const filterObj = (obj, ...allowedFields) => {
   const newObj = {};
@@ -20,13 +21,6 @@ exports.getAllUsers = catchAsync(async (req, res, next) => {
     }
   });
 });
-
-exports.getUser = (req, res) => {
-  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
-    status: "error",
-    message: "This route is not yet defined.."
-  });
-};
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   // 1) Create error if user POSTs password data
@@ -55,6 +49,13 @@ exports.updateMe = catchAsync(async (req, res, next) => {
     }
   });
 });
+
+exports.getUser = (req, res) => {
+  res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
+    status: "error",
+    message: "This route is not yet defined.."
+  });
+};
 
 exports.updateUser = (req, res) => {
   res.status(httpStatus.INTERNAL_SERVER_ERROR).json({
