@@ -3,8 +3,32 @@ const httpStatus = require("http-status");
 const User = require("../models/userModel");
 const catchAsync = require("../Utils/catchAsync");
 const AppError = require("../Utils/appError");
-const jwtToken = require("../middlewares/jwtToken");
+const signToken = require("../middlewares/signToken");
 const sendEmail = require("../Utils/email");
+
+const createSendToken = (user, statusCode, res) => {
+  const token = signToken(user._id);
+  const cookieOptions = {
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true
+  };
+  if (process.env.NODE_ENV === "production") cookieOptions.secure = true;
+
+  res.cookie("jwt", token, cookieOptions);
+
+  // Remove password from output
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status: "success",
+    token,
+    data: {
+      user
+    }
+  });
+};
 
 exports.signUp = catchAsync(async (req, res, next) => {
   const user = await User.create({
@@ -15,7 +39,7 @@ exports.signUp = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm
   });
 
-  const token = jwtToken(user._id);
+  const token = signToken(user._id);
   res.status(httpStatus.CREATED).json({
     status: "success",
     token,
@@ -40,7 +64,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
   // 3)if everything is okay, send token to client
 
-  const token = jwtToken(user._id);
+  const token = signToken(user._id);
   res.status(httpStatus.CREATED).json({
     status: "success",
     token,
