@@ -22,6 +22,7 @@ const Limiter = rateLimit({
     "Too many requests from your IP address, please try agin in an hour time."
 });
 
+// To avoid users making more than 200 requests on the same IP address
 app.use("/api", Limiter);
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
