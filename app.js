@@ -19,7 +19,8 @@ const Limiter = rateLimit({
   max: 200,
   windowMs: 60 * 60 * 1000,
   message:
-    "Too many requests from your IP address, please try agin in an hour time."
+    "Too many requests from your IP address, please try agin in an hour time.",
+  standardHeaders: true
 });
 
 // To avoid users making more than 200 requests on the same IP address
