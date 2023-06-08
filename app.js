@@ -18,9 +18,11 @@ if (process.env.NODE_ENV === "development") {
 const Limiter = rateLimit({
   max: 200,
   windowMs: 60 * 60 * 1000,
-  message: "Too many requests from your IP address, please try agin in an hour time."
+  message:
+    "Too many requests from your IP address, please try agin in an hour time."
 });
 
+app.use("/api", Limiter);
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 // For getting time
