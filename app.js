@@ -27,9 +27,10 @@ const Limiter = rateLimit({
   standardHeaders: true
 });
 
-// To avoid users making more than 200 requests on the same IP address
+// Limit requests from same API
 app.use("/api", Limiter);
-app.use(express.json());
+// Body parser, reading data from body into req.body
+app.use(express.json({ limit: "10kb" }));
 app.use(express.static(`${__dirname}/public`));
 // For getting time
 app.use((req, res, next) => {
