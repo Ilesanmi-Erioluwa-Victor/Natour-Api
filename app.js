@@ -15,7 +15,11 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
-const Limiter = rateLimit({})
+const Limiter = rateLimit({
+  max: 200,
+  windowMs: 60 * 60
+});
+
 app.use(express.json());
 app.use(express.static(`${__dirname}/public`));
 // For getting time
