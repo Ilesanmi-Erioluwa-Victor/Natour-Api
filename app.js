@@ -11,7 +11,10 @@ const globalErrorHandler = require("./controllers/errorCtrl");
 
 const app = express();
 
-// Middleware
+// 1) GLOBAL MIDDLEWARES
+// Set security HTTP headers
+app.use(helmet());
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
