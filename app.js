@@ -55,14 +55,16 @@ app.use(
   })
 );
 
+// 2) Serving static files
 app.use(express.static(`${__dirname}/public`));
-// For getting time
+
+// Test middleware
 app.use((req, res, next) => {
   req.requestTime = new Date().toLocaleString();
   next();
 });
 
-// Routes
+// 3) Routes
 app.use("/api/v1/tours", tourRouter);
 app.use("/api/v1/users", userRouter);
 
