@@ -8,6 +8,7 @@ const tourSchema = new mongoose.Schema(
       required: [true, "Name is required"],
       trim: true
     },
+    slug: String,
     duration: {
       type: Number,
       required: [true, "A tour must have a duration"]
