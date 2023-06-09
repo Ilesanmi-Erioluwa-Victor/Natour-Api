@@ -65,7 +65,6 @@ const tourSchema = new mongoose.Schema(
     },
     images: [String],
     startDates: [Date],
-    slug: String,
     secretTour: {
       type: Boolean,
       default: false
