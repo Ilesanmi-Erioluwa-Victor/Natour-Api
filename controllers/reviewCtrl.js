@@ -1,10 +1,11 @@
+const httpStatus = require("http-status");
 const catchAsync = require("../Utils/catchAsync");
 const Review = require("../models/reviewModel");
 
 exports.getAllReviews = catchAsync(async (req, res, next) => {
   const reviews = await Review.find({});
 
-  res.status(200).json({
+  res.status(OK).json({
     status: "Success",
     results: reviews.length,
     data: {
@@ -16,7 +17,7 @@ exports.getAllReviews = catchAsync(async (req, res, next) => {
 exports.createReview = catchAsync(async (req, res, next) => {
   const newReview = await Review.create(req.body);
 
-  res.status(201).json({
+  res.status(httpStatus.CREATED).json({
     status: "Success",
     data: {
       review: newReview
