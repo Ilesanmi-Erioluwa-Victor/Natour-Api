@@ -42,7 +42,7 @@ exports.getTour = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const tour = await Tour.findById(id).populate({
     path: "guides",
-    select: "- __v"
+    select: "-__v"
   });
 
   if (!tour) {
