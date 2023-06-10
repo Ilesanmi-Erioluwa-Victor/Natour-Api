@@ -13,6 +13,10 @@ const reviewSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  tour: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Tour"
   }
 });
 
