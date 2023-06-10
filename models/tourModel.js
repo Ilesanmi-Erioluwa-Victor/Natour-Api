@@ -150,7 +150,8 @@ tourSchema.pre(/^find/, function(next) {
     path: "guides",
     select: "-__v"
   });
-  // Same as populate 
+  // Same as populate
+  next();
 });
 
 // AGGREGATION MIDDLEWARE
