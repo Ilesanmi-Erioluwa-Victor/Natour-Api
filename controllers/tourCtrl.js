@@ -40,10 +40,12 @@ exports.getAllTours = catchAsync(async (req, res, next) => {
 
 exports.getTour = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const tour = await Tour.findById(id).populate({
-    path: "guides",
-    select: "-__v"
-  });
+  const tour = await Tour.findById(id);
+
+  //   .populate({ created a global use in tourSchema function
+  //   path: "guides",
+  //   select: "-__v"
+  // });
 
   if (!tour) {
     return next(
