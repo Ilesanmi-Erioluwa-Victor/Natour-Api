@@ -3,52 +3,63 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bycript = require("bcryptjs");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Please tell us your name"]
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-    lowercase: true,
-    validate: [validator.isEmail, "Please, provide a valid email"]
-  },
-  photo: {
-    type: String
-  },
-  role: {
-    type: String,
-    enum: ["user", "guide", "lead-guide", "admin"],
-    default: "user"
-  },
-  password: {
-    type: String,
-    required: [true, "Please provide  your password"],
-    select: false
-  },
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Please tell us your name"]
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      lowercase: true,
+      validate: [validator.isEmail, "Please, provide a valid email"]
+    },
+    photo: {
+      type: String
+    },
+    role: {
+      type: String,
+      enum: ["user", "guide", "lead-guide", "admin"],
+      default: "user"
+    },
+    password: {
+      type: String,
+      required: [true, "Please provide  your password"],
+      select: false
+    },
 
-  passwordConfirm: {
-    type: String,
-    required: [true, "Please confirm  your password"],
-    validate: {
-      validator: function(el) {
-        // This only work on create and save
-        return el === this.password;
-      },
-      message: "Password are not matched!"
+    passwordConfirm: {
+      type: String,
+      required: [true, "Please confirm  your password"],
+      validate: {
+        validator: function(el) {
+          // This only work on create and save
+          return el === this.password;
+        },
+        message: "Password are not matched!"
+      }
+    },
+    passwordChangeAt: Date,
+    passwordResetToken: String,
+    passwordResetExpires: Date,
+    active: {
+      type: Boolean,
+      default: true,
+      select: false
     }
   },
-  passwordChangeAt: Date,
-  passwordResetToken: String,
-  passwordResetExpires: Date,
-  active: {
-    type: Boolean,
-    default: true,
-    select: false
+  {
+    timestamps: true,
+    toJSON: {
+      virtuals: true
+    },
+    toObject: {
+      virtuals: true
+    }
   }
-});
+);
 
 userSchema.pre("save", async function(next) {
   // Only run this if password is modified
