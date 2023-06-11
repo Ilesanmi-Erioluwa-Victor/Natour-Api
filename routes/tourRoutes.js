@@ -8,6 +8,8 @@ const reviewCtrl = require("./../controllers/reviewCtrl");
 const authCtrl = require("./../controllers/authCtrl");
 // router.param("id", ValidateId);
 
+router.use("/:tourId/reviews", reviewCtrl.getAllReviews);
+
 router
   .route("/top-5-cheapTours")
   .get(tourCtrl.aliasesTopTours, tourCtrl.getAllTours);
