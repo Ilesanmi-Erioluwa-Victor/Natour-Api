@@ -4,7 +4,8 @@ const router = express.Router();
 
 // const ValidateId = require("../middlewares/ValidateId");
 const tourCtrl = require("./../controllers/tourCtrl");
-const reviewCtrl = require("./../controllers/reviewCtrl")
+const reviewCtrl = require("./../controllers/reviewCtrl");
+const authCtrl = require("./../controllers/authCtrl");
 // router.param("id", ValidateId);
 
 router
