@@ -4,11 +4,11 @@ const router = express.Router();
 
 // const ValidateId = require("../middlewares/ValidateId");
 const tourCtrl = require("./../controllers/tourCtrl");
-const reviewCtrl = require("./../controllers/reviewCtrl");
-const authCtrl = require("./../controllers/authCtrl");
+const reviewRoute = require("./../controllers/reviewCtrl");
+const authCtrl = require("./../routes/reviewRoutes");
 // router.param("id", ValidateId);
 
-router.use("/:tourId/reviews", reviewCtrl.getAllReviews);
+router.use("/:tourId/reviews", reviewRoute);
 
 router
   .route("/top-5-cheapTours")
