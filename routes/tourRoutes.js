@@ -4,17 +4,17 @@ const router = express.Router();
 
 // const ValidateId = require("../middlewares/ValidateId");
 const tourCtrl = require("./../controllers/tourCtrl");
-const reviewRoute = require("./../controllers/reviewCtrl");
+// const reviewRoute = require("./../controllers/reviewCtrl");
 const authCtrl = require("./../routes/reviewRoutes");
 // router.param("id", ValidateId);
 
-router.use("/:tourId/reviews", reviewRoute);
+// router.use("/:tourId/reviews", reviewRoute);
 
 router
   .route("/top-5-cheap")
   .get(tourCtrl.aliasesTopTours, tourCtrl.getAllTours);
 
-router.route("/tour-stats").get(tourCtrl.getTourStats);
+router.route("/tour-stats").get(tourCtrl.getToursStats);
 router
   .route("/monthly-plan/:year")
   .get(
